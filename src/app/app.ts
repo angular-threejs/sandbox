@@ -15,10 +15,11 @@ const routes = import.meta.glob(['/src/app/routes/**/*.ts'], { eager: true });
 export class App {
     readonly routes: RouteInfo[] = Object.keys(routes).map((key) => {
         const route = routes[key] as Record<string, any>;
+        console.log(route, key);
         return {
             ...route['routeMeta'],
             ...route['routeMeta']['data'],
-            path: key.replace('/src/app/routes/', '').replace('.ts', ''),
+            path: key.replace('/src/app/routes/', '').replace('/index.ts', ''),
         };
     });
     readonly router = inject(Router);

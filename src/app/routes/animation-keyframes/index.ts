@@ -54,6 +54,6 @@ class Scene {
     templateUrl: 'animation-keyframes.html',
     imports: [NgtCanvas],
 })
-export default class DemoAnimationKeyframes {
+export default class AnimationKeyframes {
     readonly SceneGraph = Scene;
 }
