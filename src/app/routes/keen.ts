@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 import * as THREE from 'three';
 import { GLTF } from 'three-stdlib';
 
-
 export const routeMeta: RouteMeta = {
     title: 'Keen',
 };

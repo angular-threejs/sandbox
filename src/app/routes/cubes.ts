@@ -11,7 +11,7 @@ export const routeMeta: RouteMeta = {
     selector: 'Cube',
     standalone: true,
     template: `
-        <ngt-mesh [position]="position" (beforeRender)="onBeforeRender($event.object)">
+        <ngt-mesh [position]="position" (beforeRender)="onBeforeRender($any($event).object)">
             <ngt-box-geometry />
             <ngt-mesh-standard-material color="red" />
         </ngt-mesh>
