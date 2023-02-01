@@ -5,6 +5,9 @@ import { NgtsOrbitControls } from 'angular-three-soba/controls';
 
 export const routeMeta: RouteMeta = {
     title: 'Simple Cubes',
+    data: {
+        asset: 'examples/cubes',
+    },
 };
 
 @Component({

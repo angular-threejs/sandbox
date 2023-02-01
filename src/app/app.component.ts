@@ -1,27 +1,93 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, Directive, ElementRef, HostBinding, HostListener, inject, Input } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 const routes = import.meta.glob(['/src/app/routes/**/*.ts'], { eager: true });
 
 interface RouteInfo {
-    title: string;
     path: string;
+    title: string;
+    asset: string;
+}
+
+@Directive({
+    selector: 'video[sandboxAutoplay]',
+    standalone: true,
+})
+export class Autoplay {
+    private readonly videoElementRef: ElementRef<HTMLVideoElement> = inject(ElementRef, { self: true });
+
+    @HostListener('mouseover')
+    onMouseOver() {
+        this.videoElementRef.nativeElement.play().catch(() => {  });
+    }
+
+    @HostListener('mouseout')
+    onMouseOut() {
+        this.videoElementRef.nativeElement.pause();
+        this.videoElementRef.nativeElement.currentTime = 0;
+    }
+}
+
+@Component({
+    selector: 'RouteCard',
+    standalone: true,
+    template: `
+        <a
+            class="w-full overflow-hidden"
+            style="border-start-start-radius: inherit;border-start-end-radius: inherit;border-end-start-radius: unset;border-end-end-radius: unset;"
+            [routerLink]="[route.path]"
+        >
+            <video
+                sandboxAutoplay
+                muted
+                playsinline
+                class="w-full h-full max-h-48 object-cover cursor-pointer"
+                [title]="route.title"
+                [poster]="isIOS ? route.asset + '.gif' : ''"
+            >
+                <source
+                    *ngFor="let source of ['webm', 'mp4']"
+                    [src]="route.asset + '.' + source"
+                    [type]="'video/' + source"
+                />
+                <img
+                    class="w-full h-full max-h-48 object-cover cursor-pointer"
+                    [src]="route.asset + '.gif'"
+                    [alt]="route.title"
+                    loading="lazy"
+                />
+            </video>
+        </a>
+
+        <div class="card-body p-1">
+            <code>{{ route.title }}</code>
+        </div>
+    `,
+    imports: [NgFor, RouterLink, Autoplay],
+})
+export class RouteCard {
+    @HostBinding('class') hostClass = 'card d-block w-72 bg-base-100 shadow-xl pl-0 pt-0 pr-0 gap-0';
+    @Input() route!: RouteInfo;
+    isIOS = false;
 }
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, RouterLink, NgFor],
+    imports: [RouterOutlet, NgFor, RouteCard],
     template: `
         <div class="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content flex flex-col items-center justify-center">
                 <!-- Page content here -->
-                <div class="h-full w-full">
+                <div class="h-full w-full relative">
                     <router-outlet />
                 </div>
-                <label for="my-drawer-2" class="btn btn-primary btn-circle drawer-button absolute top-4 left-4 lg:hidden">
+                <label
+                    for="my-drawer-2"
+                    class="btn btn-primary btn-circle drawer-button absolute top-4 left-4 lg:hidden"
+                >
                     <svg
                         class="h-6 w-6"
                         xmlns="http://www.w3.org/2000/svg"
@@ -35,12 +101,12 @@ interface RouteInfo {
                     </svg>
                 </label>
             </div>
-            <div class="drawer-side">
+            <div class="drawer-side border-r-zinc-300 border-r-2">
                 <label for="my-drawer-2" class="drawer-overlay"></label>
-                <ul class="menu p-4 w-80 bg-base-100 text-base-content">
+                <ul class="menu gap-4 p-4 w-80 bg-base-100 text-base-content">
                     <!-- Sidebar content here -->
                     <li *ngFor="let route of routes">
-                        <a [routerLink]="[route.path]">{{ route.title }}</a>
+                        <RouteCard [route]="route"/>
                     </li>
                 </ul>
             </div>
@@ -48,11 +114,18 @@ interface RouteInfo {
     `,
 })
 export class AppComponent {
+    readonly isIOS = false;
     readonly routes: RouteInfo[] = Object.keys(routes).map((key) => {
         const route = routes[key] as Record<string, any>;
         return {
             ...route['routeMeta'],
+            ...route['routeMeta']['data'],
             path: key.replace('/src/app/routes/', '').replace('.ts', ''),
         };
     });
+    readonly router = inject(Router);
+
+    ngOnInit() {
+        this.router.navigate(['/animation-keyframes']);
+    }
 }
