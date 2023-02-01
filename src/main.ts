@@ -4,10 +4,10 @@ import { extend } from 'angular-three';
 import * as THREE from 'three';
 import 'zone.js';
 
-import { AppComponent } from './app/app.component';
+import { App } from './app/app';
 
 extend(THREE);
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
     providers: [provideFileRouter()],
 });

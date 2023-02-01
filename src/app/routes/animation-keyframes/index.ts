@@ -10,21 +10,12 @@ import Stats from 'three/examples/jsm/libs/stats.module.js';
 
 export const routeMeta: RouteMeta = {
     title: 'THREE.js Animation keyframes',
-    data: {
-        asset: 'examples/animation-keyframes',
-    },
+    data: { asset: 'examples/animation-keyframes' },
 };
 
 @Component({
     standalone: true,
-    template: `
-        <ngt-color *args="['#bfe3dd']" attach="background" />
-        <ngt-value [rawValue]="texture" attach="environment" />
-
-        <ngt-primitive *args="[model$ | ngtPush]" [position]="[1, 1, 0]" [scale]="0.01" />
-
-        <ngts-orbit-controls [target]="[0, 0.5, 0]" [enablePan]="false" />
-    `,
+    templateUrl: 'scene.html',
     imports: [NgtArgs, NgtPush, NgtsOrbitControls],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -60,9 +51,7 @@ class Scene {
 
 @Component({
     standalone: true,
-    template: `
-        <ngt-canvas [sceneGraph]="SceneGraph" [camera]="{ fov: 40, far: 100, position: [5, 2, 10] }" />
-    `,
+    templateUrl: 'animation-keyframes.html',
     imports: [NgtCanvas],
 })
 export default class DemoAnimationKeyframes {

@@ -12,9 +12,7 @@ import { GLTF } from 'three-stdlib';
 
 export const routeMeta: RouteMeta = {
     title: 'Keen',
-    data: {
-        asset: 'examples/keen',
-    },
+    data: { asset: 'examples/keen' },
 };
 
 interface KeenGLTF extends GLTF {
@@ -24,28 +22,7 @@ interface KeenGLTF extends GLTF {
 
 @Component({
     standalone: true,
-    template: `
-        <ngt-color *args="['black']" attach="background" />
-
-        <ngt-ambient-light />
-        <ngt-directional-light [position]="[0, 1, 2]" />
-
-        <ngt-group
-            *ngIf="keen$ | ngtPush as keen"
-            [position]="[0, -7, 0]"
-            [rotation]="[-Math.PI / 2, 0, 0]"
-            (beforeRender)="onBeforeRender($any($event))"
-        >
-            <ngt-mesh [material]="keen.materials['Scene_-_Root']" [geometry]="keen.nodes['mesh_0'].geometry" />
-        </ngt-group>
-
-        <ngtp-effect-composer>
-            <ngtp-bloom [intensity]="5" />
-            <ngtp-dot-screen [scale]="3" />
-        </ngtp-effect-composer>
-
-        <ngts-orbit-controls />
-    `,
+    templateUrl: 'scene.html',
     imports: [NgtpEffectComposer, NgtpBloom, NgtpDotScreen, NgtPush, NgIf, NgtArgs, NgtsOrbitControls],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -60,9 +37,7 @@ class Scene {
 
 @Component({
     standalone: true,
-    template: `
-        <ngt-canvas [sceneGraph]="scene" [camera]="{ position: [0, 0, 15], near: 5, far: 20 }" />
-    `,
+    templateUrl: 'keen.html',
     imports: [NgtCanvas],
 })
 export default class Keen {
