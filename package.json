@@ -29,6 +29,7 @@
         "angular-three-postprocessing": "^1.0.2",
         "angular-three-soba": "^1.0.2",
         "daisyui": "^2.49.0",
+        "nice-color-palettes": "^3.0.0",
         "postprocessing": "^6.0.0",
         "rxjs": "~7.8.0",
         "three": "^0.148.0",

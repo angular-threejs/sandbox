@@ -1,0 +1,6 @@
+<ngt-instanced-mesh #instanced *args="[undefined, undefined, length]">
+    <ngt-box-geometry *args="[0.15, 0.15, 0.15]">
+        <ngt-instanced-buffer-attribute attach="attributes.color" *args="[colors, 3]" />
+    </ngt-box-geometry>
+    <ngt-mesh-lambert-material [vertexColors]="true" [toneMapped]="false" />
+</ngt-instanced-mesh>
