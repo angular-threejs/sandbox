@@ -1,0 +1,19 @@
+<ngt-portal [state]="{camera}">
+    <ng-template ngtPortalContent>
+        <ngt-mesh
+            #cube
+            [position]="position"
+            (pointerout)="hovered = -1"
+            (pointermove)="hovered = Math.floor(($any($event).faceIndex || 0) / 2)"
+        >
+            <ngt-box-geometry *args="[60, 60, 60]" />
+            <ngt-mesh-lambert-material
+                *ngFor="let i; repeat 6"
+                [attach]="['material', i]"
+                [color]="hovered === i ? 'orange' : 'white'"
+            />
+        </ngt-mesh>
+        <ngt-ambient-light />
+        <ngt-point-light [position]="200" [intensity]="0.5" />
+    </ng-template>
+</ngt-portal>
