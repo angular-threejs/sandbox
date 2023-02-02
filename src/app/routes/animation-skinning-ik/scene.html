@@ -1,0 +1,15 @@
+<ngt-color *args="['#dddddd']" attach="background" />
+<ngt-fog-exp2 *args="['#ffffff', 0.17]" attach="fog" />
+
+<ngt-ambient-light [intensity]="8" />
+
+<ngt-primitive *args="[model$ | ngtPush]" (afterAttach)="onAfterModelAttach()" />
+
+<ngt-cube-camera #camera *args="[0.05, 50, cubeRenderTarget]" />
+
+<ng-container *ngIf="ooi.kira as kira">
+    <ngt-cCDIK-helper *args="[kira, iks, 0.01]" />
+</ng-container>
+
+<ngts-orbit-controls [minDistance]="0.2" [maxDistance]="1.5" [controlsRef]="orbitControlsRef" />
+<ngt-transform-controls #controls *args="[camera, glDom]" [size]="0.75" [showX]="false" space="world" />

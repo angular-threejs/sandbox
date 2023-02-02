@@ -1,0 +1,7 @@
+<ngt-canvas
+    [sceneGraph]="scene"
+    [legacy]="true"
+    [camera]="{fov: 55, near: 0.001, far: 5000, position: [0.9728517749133652, 1.1044765132727201, 0.7316689528482836]}"
+    [gl]="{logarithmicDepthBuffer: true}"
+    (created)="$event.gl.physicallyCorrectLights = true; $event.camera.lookAt($event.scene.position)"
+/>
