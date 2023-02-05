@@ -16,7 +16,6 @@ import * as THREE from 'three';
 
 export const routeMeta: RouteMeta = {
     title: 'Heads Up Display with Portal',
-    data: { asset: 'examples/view-cube' },
 };
 
 @Component({

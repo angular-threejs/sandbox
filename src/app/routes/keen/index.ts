@@ -12,7 +12,6 @@ import { GLTF } from 'three-stdlib';
 
 export const routeMeta: RouteMeta = {
     title: 'Keen',
-    data: { asset: 'examples/keen' },
 };
 
 interface KeenGLTF extends GLTF {

@@ -5,7 +5,6 @@ import { NgtsOrbitControls } from 'angular-three-soba/controls';
 
 export const routeMeta: RouteMeta = {
     title: 'Simple Cubes',
-    data: { asset: 'examples/cubes' },
 };
 
 @Component({
@@ -16,6 +15,8 @@ export const routeMeta: RouteMeta = {
 })
 class Cube {
     @Input() position: [number, number, number] = [0, 0, 0];
+
+    hovered = false;
 
     onBeforeRender(cube: THREE.Mesh) {
         cube.rotation.x += 0.01;
@@ -29,7 +30,7 @@ class Cube {
     imports: [NgtsOrbitControls, Cube],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-class Scene { }
+class Scene {}
 
 @Component({
     standalone: true,

@@ -12,7 +12,6 @@ import { GLTF } from 'three-stdlib';
 
 export const routeMeta: RouteMeta = {
     title: 'Reuse GLTF',
-    data: { asset: 'examples/reuse-gltf' },
 };
 
 interface ShoeGLTF extends GLTF {

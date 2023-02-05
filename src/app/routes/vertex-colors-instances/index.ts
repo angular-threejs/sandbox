@@ -9,7 +9,6 @@ const niceColor = niceColors[Math.floor(Math.random() * niceColors.length)];
 
 export const routeMeta: RouteMeta = {
     title: 'Vertex Colors Instances',
-    data: { asset: 'examples/vertex-colors-instances' },
 };
 
 @Component({

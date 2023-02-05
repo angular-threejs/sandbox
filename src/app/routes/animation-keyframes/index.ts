@@ -10,7 +10,6 @@ import Stats from 'three/examples/jsm/libs/stats.module.js';
 
 export const routeMeta: RouteMeta = {
     title: 'THREE.js Animation keyframes',
-    data: { asset: 'examples/animation-keyframes' },
 };
 
 @Component({

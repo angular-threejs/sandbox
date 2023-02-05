@@ -5,7 +5,6 @@ import * as THREE from 'three';
 
 export const routeMeta: RouteMeta = {
     title: 'THREE.js Camera',
-    data: { asset: 'examples/camera' },
 };
 
 @Component({

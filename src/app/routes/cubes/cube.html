@@ -1,4 +1,9 @@
-<ngt-mesh [position]="position" (beforeRender)="onBeforeRender($any($event).object)">
+<ngt-mesh
+    [position]="position"
+    (beforeRender)="onBeforeRender($any($event).object)"
+    (pointerover)="hovered = true"
+    (pointerout)="hovered = false"
+>
     <ngt-box-geometry />
-    <ngt-mesh-standard-material color="red" />
+    <ngt-mesh-standard-material [color]="hovered ? 'blue': 'red'" />
 </ngt-mesh>

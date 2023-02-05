@@ -21,7 +21,6 @@ import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 export const routeMeta: RouteMeta = {
     title: 'Animation w/ IK Solver',
-    data: { asset: 'examples/animation-skinning-ik' },
 };
 
 const iks = [
