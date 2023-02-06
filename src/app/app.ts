@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterOutlet, ROUTES } from '@angular/router';
 import { RouteInfoWithPath } from './routes';
 import { RouteCard } from './ui/route-card/route-card';
 
@@ -19,4 +19,10 @@ export class App {
             const path = key.replace('/src/app/routes/', '').replace('/index.ts', '');
             return { asset: `examples/${path}`, title: path, path };
         });
+
+    readonly theRoutes = inject(ROUTES);
+
+    ngOnInit() {
+        console.log(this.theRoutes);
+    }
 }

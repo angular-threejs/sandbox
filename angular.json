@@ -36,6 +36,7 @@
                     "configurations": {
                         "development": {
                             "buildTarget": "my-app:build:development",
+                            "force": true,
                             "hmr": true
                         },
                         "production": {

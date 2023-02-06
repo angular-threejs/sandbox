@@ -44,7 +44,7 @@ class Grading {
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Scene {
-    readonly statsDom = inject(NgtStore).get('gl', 'domElement', 'parentElement');
+    readonly statsDom = inject(NgtStore).get('gl', 'domElement', 'parentElement') as HTMLElement;
 }
 
 @Component({
