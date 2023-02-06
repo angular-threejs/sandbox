@@ -1,11 +1,12 @@
 import { RouteMeta } from '@analogjs/router';
 import { NgIf } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { injectNgtLoader, NgtArgs, NgtCanvas, NgtPush } from 'angular-three';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import { injectNgtLoader, NgtArgs, NgtCanvas, NgtPush, NgtStore } from 'angular-three';
 import { NgtpEffectComposer } from 'angular-three-postprocessing';
 import { NgtpLUT } from 'angular-three-postprocessing/effects';
 import { NgtsOrbitControls } from 'angular-three-soba/controls';
 import { injectNgtsTextureLoader } from 'angular-three-soba/loaders';
+import { NgtsStats } from 'angular-three-soba/performance';
 import { NgtsEnvironment } from 'angular-three-soba/staging';
 import { LookupTexture, LUTCubeLoader } from 'postprocessing';
 import { Observable } from 'rxjs';
@@ -39,10 +40,12 @@ class Grading {
 @Component({
     standalone: true,
     templateUrl: 'scene.html',
-    imports: [GradingSphere, Grading, NgtsEnvironment, NgtsOrbitControls],
+    imports: [GradingSphere, Grading, NgtsEnvironment, NgtsOrbitControls, NgtsStats],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-class Scene {}
+class Scene {
+    readonly statsDom = inject(NgtStore).get('gl', 'domElement', 'parentElement');
+}
 
 @Component({
     standalone: true,

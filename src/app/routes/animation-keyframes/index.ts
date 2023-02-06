@@ -3,10 +3,10 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { injectBeforeRender, NgtArgs, NgtCanvas, NgtPush, NgtStore } from 'angular-three';
 import { NgtsOrbitControls } from 'angular-three-soba/controls';
 import { injectNgtsGLTFLoader } from 'angular-three-soba/loaders';
+import { NgtsStats } from 'angular-three-soba/performance';
 import { map } from 'rxjs';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three-stdlib';
-import Stats from 'three/examples/jsm/libs/stats.module.js';
 
 export const routeMeta: RouteMeta = {
     title: 'THREE.js Animation keyframes',
@@ -15,14 +15,15 @@ export const routeMeta: RouteMeta = {
 @Component({
     standalone: true,
     templateUrl: 'scene.html',
-    imports: [NgtArgs, NgtPush, NgtsOrbitControls],
+    imports: [NgtArgs, NgtPush, NgtsOrbitControls, NgtsStats],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Scene {
-    private readonly stats = Stats();
-    private readonly gl = inject(NgtStore).get('gl');
+   private readonly gl = inject(NgtStore).get('gl');
     private readonly pmremGenerator = new THREE.PMREMGenerator(this.gl);
 
+
+    readonly statsDom = this.gl.domElement.parentElement as HTMLElement;
     readonly texture = this.pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
     private mixer?: THREE.AnimationMixer;
@@ -39,12 +40,7 @@ class Scene {
     constructor() {
         injectBeforeRender(({ delta }) => {
             this.mixer?.update(delta);
-            this.stats.update();
         });
-        this.stats.dom.style.position = 'absolute';
-        this.stats.dom.style.left = '';
-        this.stats.dom.style.right = '0px';
-        this.gl.domElement.parentElement?.appendChild(this.stats.dom);
     }
 }
 
