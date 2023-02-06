@@ -1,3 +1,4 @@
+import { Platform } from '@angular/cdk/platform';
 import { NgFor } from '@angular/common';
 import { Component, Directive, ElementRef, HostBinding, HostListener, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -31,5 +32,5 @@ export class Autoplay {
 export class RouteCard {
     @HostBinding('class') hostClass = 'card w-72 bg-base-100 shadow-xl pl-0 pt-0 pr-0 gap-0';
     @Input() route!: RouteInfoWithPath;
-    isIOS = false;
+    readonly isIOS = inject(Platform).IOS;
 }
