@@ -9,7 +9,7 @@
             "sourceRoot": "src",
             "prefix": "app",
             "architect": {
-                "build-base": {
+                "build": {
                     "builder": "@nrwl/vite:build",
                     "options": {
                         "configFile": "vite.config.ts",
@@ -24,13 +24,6 @@
                             "sourcemap": false,
                             "mode": "production"
                         }
-                    }
-                },
-                "build": {
-                    "builder": "nx:run-commands",
-                    "options": {
-                        "commands": ["npx nx build-base", "cp _redirects dist/client"],
-                        "parallel": false
                     }
                 },
                 "serve": {
