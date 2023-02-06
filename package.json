@@ -9,7 +9,8 @@
         "dev": "ng serve",
         "ng": "ng",
         "start": "npm run dev",
-        "build": "node --max-old-space-size=4096 node_modules/.bin/nx build",
+        "build**": "node --max-old-space-size=4096 node_modules/.bin/nx build",
+        "build": "nx build",
         "watch": "ng build --watch",
         "test": "ng test"
     },
