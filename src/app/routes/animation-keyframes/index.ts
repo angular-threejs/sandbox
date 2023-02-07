@@ -19,9 +19,8 @@ export const routeMeta: RouteMeta = {
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Scene {
-   private readonly gl = inject(NgtStore).get('gl');
+    private readonly gl = inject(NgtStore).get('gl');
     private readonly pmremGenerator = new THREE.PMREMGenerator(this.gl);
-
 
     readonly statsDom = this.gl.domElement.parentElement as HTMLElement;
     readonly texture = this.pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;

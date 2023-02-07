@@ -17,7 +17,7 @@ export class App {
         .filter((key) => !key.endsWith('routes/index.ts'))
         .map((key) => {
             const path = key.replace('/src/app/routes/', '').replace('/index.ts', '');
-            return { asset: `examples/${path}`, title: path, path };
+            return { asset: `https://github.com/angular-threejs/assets/blob/main/examples/${path}`, title: path, path };
         });
 
     readonly theRoutes = inject(ROUTES);
