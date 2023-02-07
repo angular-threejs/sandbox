@@ -1,0 +1,7 @@
+<button class="px-4 py-2 rounded bg-stone-200" (click)="blendFunctionStore.toggle()">
+    Toggle Blend Function (Current: {{blendFunctionStore.get('blendFunctionName')}})
+</button>
+<div class="h-96 w-96">
+    <ngt-canvas [sceneGraph]="scene" [camera]="{position: [10, 10, 10]}" [shadows]="true" />
+    <ngts-stats [right]="true" />
+</div>

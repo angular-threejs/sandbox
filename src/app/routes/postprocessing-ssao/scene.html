@@ -1,0 +1,13 @@
+<ngt-directional-light [castShadow]="true" [position]="[2.5, 5, 5]" />
+
+<SmallBox />
+<Box />
+<Ball />
+<Wall />
+<Ground />
+
+<ngtp-effect-composer>
+    <ngtp-ssao [blendFunction]="blendFunctionStore.get('blendFunction')" [radius]="5" [intensity]="30" [samples]="31" />
+</ngtp-effect-composer>
+
+<ngts-orbit-controls />
