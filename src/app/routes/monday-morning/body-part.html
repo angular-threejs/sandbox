@@ -1,0 +1,14 @@
+<MondayBox
+    [castShadow]="true"
+    [receiveShadow]="true"
+    [scale]="scale"
+    [position]="position"
+    [name]="name"
+    [color]="shape.color"
+    [ref]="box.ref"
+    (pointerdown)="dragConstraint.onPointerDown($any($event))"
+    (pointerup)="dragConstraint.onPointerUp()"
+>
+    <ng-container *ngIf="template" [ngTemplateOutlet]="template" />
+</MondayBox>
+<ng-content />

@@ -1,0 +1,10 @@
+<ngt-mesh
+    [ref]="lamp.ref"
+    (pointerdown)="dragConstraint.onPointerDown($any($event))"
+    (pointerup)="dragConstraint.onPointerUp()"
+>
+    <ngt-cone-geometry *args="[2, 2.5, 32]" />
+    <ngt-mesh-standard-material />
+    <ngt-point-light [intensity]="10" [distance]="5" />
+    <ngt-spot-light [position]="[0, 20, 0]" [angle]="0.4" [penumbra]="1" [intensity]="0.6" [castShadow]="true" />
+</ngt-mesh>

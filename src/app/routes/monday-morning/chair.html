@@ -1,0 +1,12 @@
+<ngt-group
+    [ref]="chair.ref"
+    (pointerdown)="dragConstraint.onPointerDown($any($event))"
+    (pointerup)="dragConstraint.onPointerUp()"
+>
+    <MondayBox [position]="[0, 0, 0]" [scale]="[3, 3, 0.5]" />
+    <MondayBox [position]="[0, -1.75, 1.25]" [scale]="[3, 0.5, 3]" />
+    <MondayBox [position]="[5 + -6.25, -3.5, 0]" [scale]="[0.5, 3, 0.5]" />
+    <MondayBox [position]="[5 + -3.75, -3.5, 0]" [scale]="[0.5, 3, 0.5]" />
+    <MondayBox [position]="[5 + -6.25, -3.5, 2.5]" [scale]="[0.5, 3, 0.5]" />
+    <MondayBox [position]="[5 + -3.75, -3.5, 2.5]" [scale]="[0.5, 3, 0.5]" />
+</ngt-group>

@@ -1,0 +1,43 @@
+<ng-template #face>
+    <ngt-group [ref]="eyes">
+        <MondayBox
+            [args]="[0.3, 0.01, 0.1]"
+            color="black"
+            [opacity]="0.8"
+            [position]="[-0.3, 0.1, 0.5]"
+            [transparent]="true"
+        />
+        <MondayBox
+            [args]="[0.3, 0.01, 0.1]"
+            color="black"
+            [opacity]="0.8"
+            [position]="[0.3, 0.1, 0.5]"
+            [transparent]="true"
+        />
+    </ngt-group>
+    <MondayBox
+        [ref]="mouth"
+        [args]="[0.3, 0.05, 0.1]"
+        color="#270000"
+        [opacity]="0.8"
+        [position]="[0, -0.2, 0.5]"
+        [transparent]="true"
+    />
+</ng-template>
+<MondayBodyPart [position]="position" name="upperBody">
+    <MondayBodyPart [position]="position" name="head" [config]="joints['neckJoint']" [template]="face" />
+    <MondayBodyPart [position]="position" name="upperLeftArm" [config]="joints['leftShoulder']">
+        <MondayBodyPart [position]="position" name="lowerLeftArm" [config]="joints['leftElbowJoint']" />
+    </MondayBodyPart>
+    <MondayBodyPart [position]="position" name="upperRightArm" [config]="joints['rightShoulder']">
+        <MondayBodyPart [position]="position" name="lowerRightArm" [config]="joints['rightElbowJoint']" />
+    </MondayBodyPart>
+    <MondayBodyPart [position]="position" name="pelvis" [config]="joints['spineJoint']">
+        <MondayBodyPart [position]="position" name="upperLeftLeg" [config]="joints['leftHipJoint']">
+            <MondayBodyPart [position]="position" name="lowerLeftLeg" [config]="joints['leftKneeJoint']" />
+        </MondayBodyPart>
+        <MondayBodyPart [position]="position" name="upperRightLeg" [config]="joints['rightHipJoint']">
+            <MondayBodyPart [position]="position" name="lowerRightLeg" [config]="joints['rightKneeJoint']" />
+        </MondayBodyPart>
+    </MondayBodyPart>
+</MondayBodyPart>

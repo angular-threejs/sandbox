@@ -1,0 +1,5 @@
+<ngt-mesh [castShadow]="true" [receiveShadow]="true" ngtCompound [ref]="ref">
+    <ngt-box-geometry *args="args" />
+    <ngt-mesh-standard-material [color]="color" [opacity]="opacity" [transparent]="transparent" />
+    <ng-content />
+</ngt-mesh>
