@@ -20,6 +20,7 @@ import {
     NgtCanvas,
     NgtInjectedRef,
     NgtPush,
+    NgtRef,
     NgtThreeEvent,
 } from 'angular-three';
 import { NgtcPhysics } from 'angular-three-cannon';
@@ -79,12 +80,12 @@ function injectDragConstraint(ref: NgtInjectedRef<THREE.Object3D>) {
     selector: 'MondayBox',
     standalone: true,
     templateUrl: 'box.html',
-    imports: [NgtArgs],
+    imports: [NgtArgs, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Box {
-    @Input() ref = injectNgtRef<THREE.Mesh>();
-    @Input() args: ConstructorParameters<typeof THREE.BoxGeometry> = [1, 1, 1];
+    @Input() boxRef = injectNgtRef<THREE.Mesh>();
+    @Input() boxArgs: ConstructorParameters<typeof THREE.BoxGeometry> = [1, 1, 1];
     @Input() color = 'white';
     @Input() opacity = 1;
     @Input() transparent = false;
@@ -132,7 +133,7 @@ class BodyPart implements OnInit {
     selector: 'MondayRagdoll',
     standalone: true,
     templateUrl: 'ragdoll.html',
-    imports: [BodyPart, Box],
+    imports: [BodyPart, Box, NgtRef],
     schemas: [NO_ERRORS_SCHEMA],
 })
 class Ragdoll {
@@ -155,7 +156,7 @@ class Ragdoll {
     selector: 'MondayPlane',
     standalone: true,
     templateUrl: 'plane.html',
-    imports: [NgtArgs],
+    imports: [NgtArgs, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Plane {
@@ -169,7 +170,7 @@ class Plane {
     selector: 'MondayChair',
     standalone: true,
     templateUrl: 'chair.html',
-    imports: [Box],
+    imports: [Box, NgtRef],
     schemas: [NO_ERRORS_SCHEMA],
 })
 class Chair {
@@ -198,17 +199,20 @@ interface CupGLTF extends GLTF {
     selector: 'MondayMug',
     standalone: true,
     templateUrl: 'mug.html',
-    imports: [NgIf, NgtPush],
+    imports: [NgIf, NgtPush, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Mug {
     readonly cup$ = injectNgtsGLTFLoader('cup.glb') as Observable<CupGLTF>;
-    readonly cylinder = injectCylinder<THREE.Group>(() => ({
-        args: [0.6, 0.6, 1, 16],
-        mass: 1,
-        position: [9, 0, 0],
-        rotation: [Math.PI / 2, 0, 0],
-    }));
+    readonly cylinder = injectCylinder<THREE.Group>(
+        () => ({
+            args: [0.6, 0.6, 1, 16],
+            mass: 1,
+            position: [9, 0, 0],
+            rotation: [Math.PI / 2, 0, 0],
+        }),
+        { waitFor: this.cup$ }
+    );
     readonly dragConstraint = injectDragConstraint(this.cylinder.ref);
 }
 
@@ -235,7 +239,7 @@ class Table {
     selector: 'MondayLamp',
     standalone: true,
     templateUrl: 'lamp.html',
-    imports: [NgtArgs],
+    imports: [NgtArgs, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Lamp {
@@ -258,18 +262,17 @@ class Lamp {
     selector: 'MondayCursor',
     standalone: true,
     templateUrl: 'cursor.html',
-    imports: [NgtArgs],
+    imports: [NgtArgs, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Cursor {
-    readonly cursorRef = inject(MONDAY_CURSOR);
     readonly sphere = injectSphere<THREE.Mesh>(
         () => ({
             args: [0.5],
             position: [0, 0, 10000],
             type: 'Static',
         }),
-        { ref: this.cursorRef }
+        { ref: inject(MONDAY_CURSOR) }
     );
 
     onBeforeRender({ state: { pointer, viewport } }: NgtBeforeRenderEvent<THREE.Mesh>) {

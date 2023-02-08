@@ -1,7 +1,7 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnInit } from '@angular/core';
 import { Triplet } from '@pmndrs/cannon-worker-api';
-import { NgtArgs, NgtCanvas } from 'angular-three';
+import { injectBeforeRender, NgtArgs, NgtCanvas, NgtRef } from 'angular-three';
 import { NgtcPhysics } from 'angular-three-cannon';
 import { injectBox, injectPlane, injectSphere } from 'angular-three-cannon/services';
 import { NgtsStats } from 'angular-three-soba/performance';
@@ -19,7 +19,7 @@ export const routeMeta: RouteMeta = {
     selector: 'KinematicSpheres',
     standalone: true,
     templateUrl: 'spheres.html',
-    imports: [NgtArgs],
+    imports: [NgtArgs, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Spheres implements OnInit {
@@ -50,7 +50,7 @@ class Spheres implements OnInit {
     selector: 'KinematicBox',
     standalone: true,
     templateUrl: 'box.html',
-    imports: [NgtArgs],
+    imports: [NgtArgs, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Box {
@@ -61,10 +61,12 @@ class Box {
         args: this.boxSize,
     }));
 
-    onBeforeRender(clock: THREE.Clock) {
-        const t = clock.getElapsedTime();
-        this.boxBody.api.position.set(Math.sin(t * 2) * 5, Math.cos(t * 2) * 5, 3);
-        this.boxBody.api.rotation.set(Math.sin(t * 6), Math.cos(t * 6), 0);
+    constructor() {
+        injectBeforeRender(({ clock }) => {
+            const t = clock.getElapsedTime();
+            this.boxBody.api.position.set(Math.sin(t * 2) * 5, Math.cos(t * 2) * 5, 3);
+            this.boxBody.api.rotation.set(Math.sin(t * 6), Math.cos(t * 6), 0);
+        });
     }
 }
 
@@ -72,7 +74,7 @@ class Box {
     selector: 'KinematicPlane',
     standalone: true,
     templateUrl: 'plane.html',
-    imports: [NgtArgs],
+    imports: [NgtArgs, NgtRef],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Plane {
