@@ -1,4 +1,4 @@
-<ngt-mesh *ref="sphere.ref" (beforeRender)="onBeforeRender($any($event))">
+<ngt-mesh [ref]="sphere.ref" (beforeRender)="onBeforeRender($any($event))">
     <ngt-sphere-geometry *args="[0.5, 32, 32]" />
     <ngt-mesh-basic-material [fog]="false" [depthTest]="false" [transparent]="true" [opacity]="0.5" />
 </ngt-mesh>

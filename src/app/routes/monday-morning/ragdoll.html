@@ -1,5 +1,5 @@
 <ng-template #face>
-    <ngt-group *ref="eyes">
+    <ngt-group [ref]="eyes">
         <MondayBox
             color="black"
             [boxArgs]="[0.3, 0.01, 0.1]"
@@ -16,8 +16,8 @@
         />
     </ngt-group>
     <MondayBox
-        *ref="mouth"
         color="#270000"
+        [ref]="mouth"
         [boxArgs]="[0.3, 0.05, 0.1]"
         [opacity]="0.8"
         [position]="[0, -0.2, 0.5]"

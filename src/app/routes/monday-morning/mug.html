@@ -1,22 +1,21 @@
-<ng-container *ngIf="cup$ | ngtPush as cup">
-    <ngt-group
-        *ref="cylinder.ref"
-        (pointerdown)="dragConstraint.onPointerDown($any($event))"
-        (pointerup)="dragConstraint.onPointerUp()"
-    >
-        <ngt-group [scale]="0.01">
-            <ngt-mesh
-                [receiveShadow]="true"
-                [castShadow]="true"
-                [geometry]="cup.nodes['buffer-0-mesh-0'].geometry"
-                [material]="cup.materials.default"
-            />
-            <ngt-mesh
-                [receiveShadow]="true"
-                [castShadow]="true"
-                [geometry]="cup.nodes['buffer-0-mesh-0_1'].geometry"
-                [material]="cup.materials.Liquid"
-            />
-        </ngt-group>
+<ngt-group
+    *ngIf="cup$ | ngtPush as cup"
+    [ref]="cylinder.ref"
+    (pointerdown)="dragConstraint.onPointerDown($any($event))"
+    (pointerup)="dragConstraint.onPointerUp()"
+>
+    <ngt-group [scale]="0.01">
+        <ngt-mesh
+            [receiveShadow]="true"
+            [castShadow]="true"
+            [geometry]="cup.nodes['buffer-0-mesh-0'].geometry"
+            [material]="cup.materials.default"
+        />
+        <ngt-mesh
+            [receiveShadow]="true"
+            [castShadow]="true"
+            [geometry]="cup.nodes['buffer-0-mesh-0_1'].geometry"
+            [material]="cup.materials.Liquid"
+        />
     </ngt-group>
-</ng-container>
+</ngt-group>

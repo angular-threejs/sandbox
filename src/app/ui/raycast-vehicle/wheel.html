@@ -1,0 +1,9 @@
+<ng-container *ngIf="wheel$ | ngtPush as wheel">
+    <ngt-group *ngIf="compound" [ref]="compound.ref">
+        <ngt-group [rotation]="[0, 0, leftSide ? Math.PI / 2 : -Math.PI / 2]">
+            <ngt-mesh [material]="wheel.materials.Rubber" [geometry]="wheel.nodes.wheel_1.geometry" />
+            <ngt-mesh [material]="wheel.materials.Steel" [geometry]="wheel.nodes.wheel_2.geometry" />
+            <ngt-mesh [material]="wheel.materials.Chrom" [geometry]="wheel.nodes.wheel_3.geometry" />
+        </ngt-group>
+    </ngt-group>
+</ng-container>

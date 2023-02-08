@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Triplet } from '@pmndrs/cannon-worker-api';
-import { NgtArgs, NgtCanvas, NgtRef, NgtRxStore } from 'angular-three';
+import { NgtArgs, NgtCanvas, NgtRxStore } from 'angular-three';
 import { NgtcPhysics } from 'angular-three-cannon';
 import { injectHeightfield, injectSphere } from 'angular-three-cannon/services';
 import { NgtsOrbitControls } from 'angular-three-soba/controls';
@@ -57,7 +57,7 @@ function generateHeightmap({ width, height, number, scale }: GenerateHeightmapAr
     selector: 'Spheres',
     standalone: true,
     templateUrl: 'spheres.html',
-    imports: [NgtArgs, NgtRef],
+    imports: [NgtArgs],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Spheres implements OnInit {
@@ -146,7 +146,7 @@ class HeightMapGeometry extends NgtRxStore<{ heights: number[][] }> {
     selector: 'Field',
     standalone: true,
     templateUrl: 'field.html',
-    imports: [NgtRef, HeightMapGeometry],
+    imports: [HeightMapGeometry],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Field {

@@ -20,7 +20,6 @@ import {
     NgtCanvas,
     NgtInjectedRef,
     NgtPush,
-    NgtRef,
     NgtThreeEvent,
 } from 'angular-three';
 import { NgtcPhysics } from 'angular-three-cannon';
@@ -80,7 +79,7 @@ function injectDragConstraint(ref: NgtInjectedRef<THREE.Object3D>) {
     selector: 'MondayBox',
     standalone: true,
     templateUrl: 'box.html',
-    imports: [NgtArgs, NgtRef],
+    imports: [NgtArgs],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Box {
@@ -133,7 +132,7 @@ class BodyPart implements OnInit {
     selector: 'MondayRagdoll',
     standalone: true,
     templateUrl: 'ragdoll.html',
-    imports: [BodyPart, Box, NgtRef],
+    imports: [BodyPart, Box],
     schemas: [NO_ERRORS_SCHEMA],
 })
 class Ragdoll {
@@ -156,7 +155,7 @@ class Ragdoll {
     selector: 'MondayPlane',
     standalone: true,
     templateUrl: 'plane.html',
-    imports: [NgtArgs, NgtRef],
+    imports: [NgtArgs],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Plane {
@@ -170,7 +169,7 @@ class Plane {
     selector: 'MondayChair',
     standalone: true,
     templateUrl: 'chair.html',
-    imports: [Box, NgtRef],
+    imports: [Box],
     schemas: [NO_ERRORS_SCHEMA],
 })
 class Chair {
@@ -199,7 +198,7 @@ interface CupGLTF extends GLTF {
     selector: 'MondayMug',
     standalone: true,
     templateUrl: 'mug.html',
-    imports: [NgIf, NgtPush, NgtRef],
+    imports: [NgIf, NgtPush],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Mug {
@@ -239,7 +238,7 @@ class Table {
     selector: 'MondayLamp',
     standalone: true,
     templateUrl: 'lamp.html',
-    imports: [NgtArgs, NgtRef],
+    imports: [NgtArgs],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Lamp {
@@ -262,7 +261,7 @@ class Lamp {
     selector: 'MondayCursor',
     standalone: true,
     templateUrl: 'cursor.html',
-    imports: [NgtArgs, NgtRef],
+    imports: [NgtArgs],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class Cursor {

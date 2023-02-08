@@ -1,0 +1,9 @@
+<ngt-group [ref]="vehicle.ref" [position]="[0, -0.4, 0]" (beforeRender)="onBeforeRender()">
+    <Chassis [chassisRef]="chassis.ref" (beetle$)="chassisReady.next()" />
+    <Wheel
+        *ngFor="let wheelRef of wheels; even as leftSide"
+        [wheelRef]="wheelRef"
+        [radius]="radius"
+        [leftSide]="leftSide"
+    />
+</ngt-group>

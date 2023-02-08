@@ -1,6 +1,6 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Directive } from '@angular/core';
-import { injectBeforeRender, NgtArgs, NgtCanvas, NgtPush, NgtRef } from 'angular-three';
+import { injectBeforeRender, NgtArgs, NgtCanvas, NgtPush } from 'angular-three';
 import { NgtcPhysics } from 'angular-three-cannon';
 import { injectSphere } from 'angular-three-cannon/services';
 import { NgtpEffectComposer } from 'angular-three-postprocessing';
@@ -31,7 +31,7 @@ const vec = new THREE.Vector3();
     selector: 'ObjectClump',
     standalone: true,
     templateUrl: 'object-clump.html',
-    imports: [NgtArgs, NgtPush, NgtRef],
+    imports: [NgtArgs, NgtPush],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 class ObjectClump {
