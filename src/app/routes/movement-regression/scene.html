@@ -1,0 +1,13 @@
+<ngt-color *args="['lightblue']" attach="background" />
+<ngt-fog *args="['#000', 0.8, 1]" attach="fog" />
+<Lights />
+<Bot [position]="[0, -1.3, 0]" />
+<ngts-text text="hello" [color]="'white'" [position]="[0, 0, -0.2]" [fontSize]="0.6" [letterSpacing]="0">
+    <ngt-value [rawValue]="false" attach="material.fog" />
+</ngts-text>
+<ngt-mesh [scale]="4" [position]="[0, 1, -0.2]">
+    <ngt-plane-geometry />
+    <ngt-mesh-standard-material color="lightblue" [toneMapped]="false" [fog]="false" [envMapIntensity]="0" />
+</ngt-mesh>
+<ngts-adaptive-dpr [pixelated]="true" />
+<Effects />

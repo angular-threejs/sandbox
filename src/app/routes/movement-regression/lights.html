@@ -1,0 +1,20 @@
+<ngt-directional-light [intensity]="1" [position]="[2, 2, 0]" color="red" [distance]="5" />
+<ngt-spot-light [intensity]="2" [position]="[-5, 10, 2]" [angle]="0.2" [penumbra]="1" [castShadow]="true">
+    <ngt-vector2 *args="[2048, 2048]" attach="shadow.mapSize" />
+</ngt-spot-light>
+<ngt-group (beforeRender)="onBeforeRender($any($event).object)">
+    <ngt-rect-area-light
+        [intensity]="2"
+        [width]="40"
+        [height]="4"
+        [position]="[4.5, 0, -3]"
+        (afterUpdate)="onAfterUpdate($any($event))"
+    />
+    <ngt-rect-area-light
+        [intensity]="2"
+        [width]="40"
+        [height]="4"
+        [position]="[-10, 2, -10]"
+        (afterUpdate)="onAfterUpdate($any($event))"
+    />
+</ngt-group>

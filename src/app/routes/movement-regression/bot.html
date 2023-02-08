@@ -1,0 +1,16 @@
+<ngt-group *ngIf="bot$ | ngtPush as bot" ngtCompound (beforeRender)="onBeforeRender($any($event).object)">
+    <ngt-mesh [castShadow]="true" [receiveShadow]="true" [geometry]="bot.nodes.Alpha_Surface.geometry">
+        <ngt-mesh-standard-material
+            [metalness]="0.4"
+            [roughness]="0.2"
+            [color]="bot.materials.Alpha_Body_MAT.color"
+            [normalMap]="texture"
+            [normalScale]="[0.15, 0.15]"
+        >
+            <ngt-value [rawValue]="[35, 35]" attach="normalMap.repeat" />
+        </ngt-mesh-standard-material>
+    </ngt-mesh>
+    <ngt-mesh [castShadow]="true" [geometry]="bot.nodes.Alpha_Joints.geometry">
+        <ngt-mesh-standard-material [metalness]="1" [roughness]="0.1" [color]="bot.materials.Alpha_Joints_MAT.color" />
+    </ngt-mesh>
+</ngt-group>
