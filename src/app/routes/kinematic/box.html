@@ -1,0 +1,9 @@
+<ngt-mesh
+    [ref]="boxBody.ref"
+    [castShadow]="true"
+    [receiveShadow]="true"
+    (beforeRender)="onBeforeRender($any($event).state.clock)"
+>
+    <ngt-box-geometry *args="boxSize" />
+    <ngt-mesh-lambert-material />
+</ngt-mesh>
