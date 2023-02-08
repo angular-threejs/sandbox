@@ -5,5 +5,5 @@
     (beforeRender)="onBeforeRender($any($event).state.clock)"
 >
     <ngt-box-geometry *args="boxSize" />
-    <ngt-mesh-lambert-material />
+    <ngt-mesh-physical-material [metalness]="1" />
 </ngt-mesh>
