@@ -1,3 +1,4 @@
+import { RouteMeta } from '@analogjs/router';
 import { NgIf } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, HostListener } from '@angular/core';
 import { NgtArgs, NgtCanvas } from 'angular-three';
@@ -8,6 +9,10 @@ import { NgtsEnvironment } from 'angular-three-soba/staging';
 import { Pillar } from '../../ui/raycast-vehicle/pillar';
 import { Plane } from '../../ui/raycast-vehicle/plane';
 import { Vehicle } from '../../ui/raycast-vehicle/vehicle';
+
+export const routeMeta: RouteMeta = {
+    title: 'Raycast Vehicle',
+};
 
 @Component({
     standalone: true,
@@ -31,6 +36,13 @@ class Scene {
     standalone: true,
     template: `
         <ngt-canvas [sceneGraph]="scene" [shadows]="true" [camera]="{ position: [0, 5, 15], fov: 50 }" />
+        <div class="text-white text-xl left-12 top-5 absolute">
+            <pre>
+* WASD to drive, space to brake
+                <br />r to reset
+                <br />? to debug
+            </pre>
+        </div>
     `,
     imports: [NgtCanvas],
 })

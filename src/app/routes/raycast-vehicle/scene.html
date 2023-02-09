@@ -1,14 +1,14 @@
 <ngt-color *args="['#171720']" attach="background" />
 <ngt-fog *args="['#171720', 10, 50]" attach="fog" />
 <ngt-ambient-light [intensity]="0.1" />
-<ngt-spot-light [position]="[10, 10, 10]" [angle]="0.5" [penumbra]="1" [castShadow]="true" />
+<ngt-spot-light [position]="10" [angle]="0.5" [penumbra]="1" [castShadow]="true" />
 <ngtc-physics
     broadphase="SAP"
     [defaultContactMaterial]="{ contactEquationRelaxation: 4, friction: 1e-3 }"
     [allowSleep]="true"
 >
     <ngtc-debug [disabled]="isDebugDisabled">
-        <Plane [rotation]="[-Math.PI / 2, 0, 0]" />
+        <RaycastVehiclePlane [rotation]="[-Math.PI / 2, 0, 0]" />
         <Vehicle [position]="[0, 2, 0]" [rotation]="[0, -Math.PI / 4, 0]" [angularVelocity]="[0, 0.5, 0]" />
         <Pillar [position]="[-5, 2.5, -5]" [userData]="{ id: 'pillar-1' }" />
         <Pillar [position]="[0, 2.5, -5]" [userData]="{ id: 'pillar-2' }" />

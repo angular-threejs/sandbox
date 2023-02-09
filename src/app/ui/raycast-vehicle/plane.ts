@@ -4,10 +4,10 @@ import { NgtArgs } from 'angular-three';
 import { injectPlane } from 'angular-three-cannon/services';
 
 @Component({
-    selector: 'Plane',
+    selector: 'RaycastVehiclePlane',
     standalone: true,
     template: `
-        <ngt-group [ref]="plane.ref">
+        <ngt-group [ref]="plane.ref" [rotation]="rotation">
             <ngt-mesh [receiveShadow]="true">
                 <ngt-plane-geometry *args="[100, 100]" />
                 <ngt-mesh-standard-material color="#303030" />
