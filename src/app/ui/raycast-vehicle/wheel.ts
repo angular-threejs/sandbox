@@ -6,8 +6,6 @@ import { injectNgtsGLTFLoader } from 'angular-three-soba/loaders';
 import { Observable } from 'rxjs';
 import { GLTF } from 'three-stdlib';
 
-injectNgtsGLTFLoader.preload('wheel.glb');
-
 type WheelGLTF = GLTF & {
     materials: Record<'Chrom' | 'Rubber' | 'Steel', THREE.Material>;
     nodes: Record<'wheel_1' | 'wheel_2' | 'wheel_3', THREE.Mesh>;

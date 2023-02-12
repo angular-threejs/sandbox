@@ -5,8 +5,6 @@ import { injectNgtsGLTFLoader } from 'angular-three-soba/loaders';
 import { Observable } from 'rxjs';
 import { GLTF } from 'three-stdlib';
 
-injectNgtsGLTFLoader.preload('Beetle.glb');
-
 const beetleMaterials = [
     'Black paint',
     'Black plastic',

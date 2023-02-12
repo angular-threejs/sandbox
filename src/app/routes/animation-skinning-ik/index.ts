@@ -127,7 +127,8 @@ class Scene {
 
         if (sphere && this.config.followSphere) {
             sphere.getWorldPosition(v0);
-            this.orbitControlsRef.nativeElement?.target.lerp(v0, 0.1);
+            this.orbitControlsRef.nativeElement.target.lerp(v0, 0.1);
+            this.orbitControlsRef.nativeElement.update();
         }
 
         if (head && sphere && this.config.turnHead) {
