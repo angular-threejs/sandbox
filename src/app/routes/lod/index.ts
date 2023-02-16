@@ -24,11 +24,13 @@ class Scene {
 
     readonly Math = Math;
 
-    readonly geom1 = injectNgtRef<THREE.IcosahedronGeometry>();
-    readonly geom2 = injectNgtRef<THREE.IcosahedronGeometry>();
-    readonly geom3 = injectNgtRef<THREE.IcosahedronGeometry>();
-    readonly geom4 = injectNgtRef<THREE.IcosahedronGeometry>();
-    readonly geom5 = injectNgtRef<THREE.IcosahedronGeometry>();
+    readonly geometries = [
+        { ref: injectNgtRef<THREE.IcosahedronGeometry>(), detail: 16 },
+        { ref: injectNgtRef<THREE.IcosahedronGeometry>(), detail: 8 },
+        { ref: injectNgtRef<THREE.IcosahedronGeometry>(), detail: 4 },
+        { ref: injectNgtRef<THREE.IcosahedronGeometry>(), detail: 2 },
+        { ref: injectNgtRef<THREE.IcosahedronGeometry>(), detail: 1 },
+    ];
 
     readonly positions = Array.from({ length: 1000 }, () => [
         10000 * (0.5 - Math.random()),
