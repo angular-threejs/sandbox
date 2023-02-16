@@ -1,0 +1,27 @@
+<ngt-color *args="['black']" attach="background" />
+<ngt-fog *args="['#000000', 1, 15000]" attach="fog" />
+
+<ngt-point-light color="#ff2200" />
+<ngt-directional-light />
+
+<ngt-mesh-lambert-material #mat [wireframe]="true" />
+<ngt-icosahedron-geometry *args="[100, 16]" [ref]="geom1" />
+<ngt-icosahedron-geometry *args="[100, 8]" [ref]="geom2" />
+<ngt-icosahedron-geometry *args="[100, 4]" [ref]="geom3" />
+<ngt-icosahedron-geometry *args="[100, 2]" [ref]="geom4" />
+<ngt-icosahedron-geometry *args="[100, 1]" [ref]="geom5" />
+
+<ngts-detailed *ngFor="let p of positions" [position]="p" [distances]="[50, 300, 1000, 2000, 8000]">
+    <ngt-mesh [geometry]="geom1.nativeElement" [material]="mat" [scale]="1.5" />
+    <ngt-mesh [geometry]="geom2.nativeElement" [material]="mat" [scale]="1.5" />
+    <ngt-mesh [geometry]="geom3.nativeElement" [material]="mat" [scale]="1.5" />
+    <ngt-mesh [geometry]="geom4.nativeElement" [material]="mat" [scale]="1.5" />
+    <ngt-mesh [geometry]="geom5.nativeElement" [material]="mat" [scale]="1.5" />
+</ngts-detailed>
+
+<ngt-fly-controls
+    *args="[camera, glDom]"
+    [movementSpeed]="1000"
+    [rollSpeed]="Math.PI / 10"
+    (beforeRender)="$any($event).object.update($any($event).state.clock.getDelta())"
+/>
