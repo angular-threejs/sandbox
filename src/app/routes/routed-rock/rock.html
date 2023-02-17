@@ -1,0 +1,52 @@
+<ngt-fog *args="['white', 15, 50]" attach="fog" />
+
+<ngt-grid-helper *args="[50, 10]" />
+
+<ngt-mesh [receiveShadow]="true" [rotation]="[Math.PI / 2, 0, 0]">
+    <ngt-plane-geometry *args="[100, 100]" />
+    <ngt-mesh-phong-material color="white" [side]="DoubleSide" [depthWrite]="false" />
+</ngt-mesh>
+
+<ngt-hemisphere-light #hemisphereLight [position]="10" [intensity]="0.2" />
+<!-- <ngt-hemisphere-light-helper *args="[hemisphereLight, 5, 'red']" /> -->
+
+<ngt-point-light [position]="10" [castShadow]="true">
+    <ngt-vector2 *args="[1024, 1024]" attach="shadow.mapSize" />
+    <ngt-value rawValue="4" attach="shadow.radius" />
+    <ngt-value rawValue="-0.0005" attach="shadow.bias" />
+</ngt-point-light>
+
+<ngt-group *ngIf="rock$ | ngtPush as rock" [position]="[0, 2.6, 0]" [scale]="3">
+    <ngt-group [rotation]="[-Math.PI / 2, 0, 0]">
+        <ngt-group [rotation]="[Math.PI / 2, 0, 0]">
+            <ngt-mesh
+                [castShadow]="true"
+                [receiveShadow]="true"
+                [geometry]="rock.nodes.defaultMaterial.geometry"
+                [material]="rock.materials['08___Default']"
+                (click)="onRockClick()"
+            />
+        </ngt-group>
+    </ngt-group>
+</ngt-group>
+
+<ngts-orbit-controls [minDistance]="12" [maxDistance]="12" [minPolarAngle]="0" [maxPolarAngle]="Math.PI / 2" />
+
+<ngt-box-geometry #box />
+<ngt-group
+    *ngFor="let menu of menus; index as i"
+    [position]="[15 * Math.cos(menu.angle), 0, 15 * Math.sin(menu.angle)]"
+    [name]="'group-' + i"
+>
+    <ngt-mesh
+        [position]="[0, 5, 0]"
+        [castShadow]="true"
+        [receiveShadow]="true"
+        [geometry]="box"
+        (click)="onCubeClick(menu)"
+    >
+        <ngt-mesh-phong-material [color]="menu.color" [side]="FrontSide" />
+    </ngt-mesh>
+</ngt-group>
+
+<router-outlet />
