@@ -8,6 +8,7 @@ import { gsap } from 'gsap';
 import { map, Observable, switchMap } from 'rxjs';
 import * as THREE from 'three';
 import { GLTF, OrbitControls } from 'three-stdlib';
+import { CursorPointer } from '../../ui/routed-rock/cursor';
 import { RoutedRockService } from '../../utils/routed-rock.service';
 
 interface RockGLTF extends GLTF {
@@ -18,7 +19,7 @@ interface RockGLTF extends GLTF {
 @Component({
     standalone: true,
     templateUrl: './rock.html',
-    imports: [NgtArgs, NgtsOrbitControls, NgtPush, NgFor, NgIf, RouterOutlet],
+    imports: [NgtArgs, NgtsOrbitControls, NgtPush, NgFor, NgIf, RouterOutlet, CursorPointer],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export default class Rock extends NgtRxStore implements OnInit {

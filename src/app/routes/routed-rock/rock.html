@@ -20,6 +20,7 @@
     <ngt-group [rotation]="[-Math.PI / 2, 0, 0]">
         <ngt-group [rotation]="[Math.PI / 2, 0, 0]">
             <ngt-mesh
+                cursorPointer
                 [castShadow]="true"
                 [receiveShadow]="true"
                 [geometry]="rock.nodes.defaultMaterial.geometry"
@@ -30,7 +31,13 @@
     </ngt-group>
 </ngt-group>
 
-<ngts-orbit-controls [controlsRef]="controlsRef" [minDistance]="12" [maxDistance]="12" [minPolarAngle]="0" [maxPolarAngle]="Math.PI / 2" />
+<ngts-orbit-controls
+    [controlsRef]="controlsRef"
+    [minDistance]="12"
+    [maxDistance]="12"
+    [minPolarAngle]="0"
+    [maxPolarAngle]="Math.PI / 2"
+/>
 
 <ngt-box-geometry #box />
 <ngt-group
@@ -39,6 +46,7 @@
     [name]="'group-' + i"
 >
     <ngt-mesh
+        cursorPointer
         [position]="[0, 5, 0]"
         [castShadow]="true"
         [receiveShadow]="true"
