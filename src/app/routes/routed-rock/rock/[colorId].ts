@@ -1,9 +1,9 @@
 import { injectActivatedRoute } from '@analogjs/router';
 import { NgFor, NgIf } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { injectNgtDestroy, NgtArgs, NgtParent, NgtPush } from 'angular-three';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
+import { NgtArgs, NgtParent, NgtPush, NgtRxStore } from 'angular-three';
 import { NgtsText } from 'angular-three-soba/abstractions';
-import { filter, map, takeUntil } from 'rxjs';
+import { filter, map } from 'rxjs';
 import * as THREE from 'three';
 import { RoutedRockService } from '../../../utils/routed-rock.service';
 
@@ -13,14 +13,12 @@ import { RoutedRockService } from '../../../utils/routed-rock.service';
     imports: [NgIf, NgtPush, NgtArgs, NgtParent, NgtsText, NgFor],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export default class RockColor {
+export default class RockColor extends NgtRxStore implements OnInit {
     readonly Math = Math;
     readonly FrontSide = THREE.FrontSide;
 
     private readonly route = injectActivatedRoute();
     private readonly routedRockService = inject(RoutedRockService);
-
-    private readonly ngtDestroy = injectNgtDestroy();
 
     readonly parent$ = this.routedRockService.parent$;
     readonly menu$ = this.routedRockService.menu$;
@@ -35,14 +33,14 @@ export default class RockColor {
     }));
 
     ngOnInit() {
-        this.route.params
-            .pipe(
+        this.hold(
+            this.route.params.pipe(
                 filter((params) => !!params['colorId']),
-                map((params) => params['colorId']),
-                takeUntil(this.ngtDestroy.destroy$)
-            )
-            .subscribe((colorId) => {
+                map((params) => params['colorId'])
+            ),
+            (colorId) => {
                 this.routedRockService.contentId = colorId;
-            });
+            }
+        );
     }
 }
