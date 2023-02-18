@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { inject, Injectable, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, map } from 'rxjs';
 
 export interface Color {
     color: string;
@@ -9,8 +10,25 @@ export interface Color {
 
 @Injectable({ providedIn: 'root' })
 export class RoutedRockService {
+    private readonly router = inject(Router);
+    private readonly zone = inject(NgZone);
+
     private selectedId$ = new BehaviorSubject<number | null>(null);
     readonly id$ = this.selectedId$.asObservable();
+
+    readonly menu$ = this.id$.pipe(
+        map((id) => {
+            if (id == null) return null;
+            return this.menus.find((menu) => menu.id === id);
+        })
+    );
+
+    readonly parent$ = this.id$.pipe(
+        map((id) => {
+            if (id == null) return null;
+            return `group-${id}`;
+        })
+    );
 
     colors: Color[] = [
         {
@@ -50,5 +68,20 @@ export class RoutedRockService {
 
     set selectedId(id: number | null) {
         this.selectedId$.next(id);
+    }
+
+    set contentId(contentId: string) {
+        this.selectedId = this.menus.findIndex((menu) => menu.path.includes(contentId));
+        console.log({ contentId, selected: this.selectedId, menus: this.menus });
+    }
+
+    navigateByMenu(menu: (typeof this.menus)[number] | null) {
+        this.zone.run(() => {
+            if (menu) {
+                this.router.navigateByUrl(menu.path);
+            } else {
+                this.router.navigateByUrl('/routed-rock/rock');
+            }
+        });
     }
 }

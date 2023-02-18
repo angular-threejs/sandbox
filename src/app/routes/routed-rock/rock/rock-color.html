@@ -1,1 +1,27 @@
-<ngt-group></ngt-group>
+<ngt-group *parent="parent$ | ngtPush">
+    <ng-container *ngIf="menu$ | ngtPush as menu">
+        <ngt-mesh
+            [castShadow]="true"
+            [receiveShadow]="true"
+            [rotation]="[0, Math.PI / 4, 0]"
+            [position]="[0, 7, 0]"
+            [scale]="0.5"
+        >
+            <ngt-box-geometry *args="[0.7, 0.7, 0.7]" />
+            <ngt-mesh-phong-material [color]="menu.color" [side]="FrontSide" />
+        </ngt-mesh>
+
+        <ngt-group [position]="[0, 5, 0]">
+            <ng-container *ngFor="let text of texts">
+                <ngts-text
+                    [text]="menu.label"
+                    font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+                    [color]="menu.color"
+                    [fontSize]="0.5"
+                    [position]="text.position"
+                    [rotation]="text.rotation"
+                />
+            </ng-container>
+        </ngt-group>
+    </ng-container>
+</ngt-group>
