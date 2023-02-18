@@ -7,6 +7,8 @@ import { filter, map } from 'rxjs';
 import * as THREE from 'three';
 import { RoutedRockService } from '../../../utils/routed-rock.service';
 
+// TODO  there's a bug with using the Back button
+
 @Component({
     standalone: true,
     templateUrl: './rock-color.html',

@@ -1,6 +1,6 @@
 import { inject, Injectable, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, map } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject, filter, map } from 'rxjs';
 
 export interface Color {
     color: string;
@@ -28,6 +28,10 @@ export class RoutedRockService {
             if (id == null) return null;
             return `group-${id}`;
         })
+    );
+
+    readonly routerEvents$ = this.router.events.pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     );
 
     colors: Color[] = [
@@ -58,10 +62,10 @@ export class RoutedRockService {
         },
     ];
     menus = this.colors.map((color, index) => ({
-        id: index,
+        id: index + 1,
         label: color.label,
         path: `/routed-rock/rock/${color.slug}`,
-        contentId: index,
+        contentId: index + 1,
         color: color.color,
         angle: ((360 / this.colors.length) * index * Math.PI) / 180,
     }));
@@ -71,7 +75,10 @@ export class RoutedRockService {
     }
 
     set contentId(contentId: string) {
-        this.selectedId = this.menus.findIndex((menu) => menu.path.includes(contentId));
+        const index = this.menus.findIndex((menu) => menu.path.includes(contentId));
+        if (index !== -1) {
+            this.selectedId = index + 1;
+        }
         console.log({ contentId, selected: this.selectedId, menus: this.menus });
     }
 

@@ -62,6 +62,12 @@ export default class Rock extends NgtRxStore implements OnInit {
                 gsap.to(controls.target, { x: position.x, y: position.y, z: position.z, duration: 0.5 });
             }
         );
+
+        this.hold(this.routedRockService.routerEvents$, (event) => {
+            if (event.url.endsWith('/routed-rock/rock') || event.url.endsWith('/routed-rock/rock/')) {
+                this.routedRockService.selectedId = null;
+            }
+        });
     }
 
     onCubeClick(menu: (typeof this.menus)[number]) {

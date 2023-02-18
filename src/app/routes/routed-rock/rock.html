@@ -41,9 +41,9 @@
 
 <ngt-box-geometry #box />
 <ngt-group
-    *ngFor="let menu of menus; index as i"
+    *ngFor="let menu of menus"
     [position]="[15 * Math.cos(menu.angle), 0, 15 * Math.sin(menu.angle)]"
-    [name]="'group-' + i"
+    [name]="'group-' + menu.id"
 >
     <ngt-mesh
         cursorPointer
