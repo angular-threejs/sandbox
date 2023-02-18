@@ -52,6 +52,7 @@ export default class Rock {
                             const parentObject = this.store.get('scene').getObjectByName(parent);
                             if (parentObject) {
                                 defaultPosition.copy(parentObject.position);
+                                defaultPosition.setY(defaultPosition.y + 6);
                                 return defaultPosition;
                             }
                         }
