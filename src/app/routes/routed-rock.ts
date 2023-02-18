@@ -20,7 +20,7 @@ export default class RoutedRock implements OnInit {
     readonly document = inject(DOCUMENT);
 
     ngOnInit() {
-        if (this.document.URL.endsWith('routed-rock/')) {
+        if (this.document.URL.endsWith('routed-rock') || this.document.URL.endsWith('routed-rock/')) {
             this.router.navigate(['rock'], { relativeTo: this.route });
         }
     }
