@@ -25,14 +25,14 @@
                 [receiveShadow]="true"
                 [geometry]="rock.nodes.defaultMaterial.geometry"
                 [material]="rock.materials['08___Default']"
-                (click)="onRockClick()"
+                (click)="routedRockService.navigateByMenu(null)"
             />
         </ngt-group>
     </ngt-group>
 </ngt-group>
 
 <ngts-orbit-controls
-    [controlsRef]="controlsRef"
+    [controlsRef]="routedRockService.get('controlsRef')"
     [minDistance]="12"
     [maxDistance]="12"
     [minPolarAngle]="0"
@@ -51,7 +51,7 @@
         [castShadow]="true"
         [receiveShadow]="true"
         [geometry]="box"
-        (click)="onCubeClick(menu)"
+        (click)="routedRockService.navigateByMenu(menu)"
     >
         <ngt-mesh-phong-material [color]="menu.color" [side]="FrontSide" />
     </ngt-mesh>

@@ -7,8 +7,6 @@ import { filter, map } from 'rxjs';
 import * as THREE from 'three';
 import { RoutedRockService } from '../../../utils/routed-rock.service';
 
-// TODO  there's a bug with using the Back button
-
 @Component({
     standalone: true,
     templateUrl: './rock-color.html',
@@ -22,8 +20,8 @@ export default class RockColor extends NgtRxStore implements OnInit {
     private readonly route = injectActivatedRoute();
     private readonly routedRockService = inject(RoutedRockService);
 
-    readonly parent$ = this.routedRockService.parent$;
-    readonly menu$ = this.routedRockService.menu$;
+    readonly parent$ = this.routedRockService.select('parent');
+    readonly menu$ = this.routedRockService.select('currentMenu');
 
     readonly texts = Array.from({ length: 3 }, (_, index) => ({
         rotation: [0, ((360 / 3) * index * Math.PI) / 180, 0],
