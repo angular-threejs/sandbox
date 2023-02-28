@@ -1,3 +1,4 @@
+import { RouteMeta } from '@analogjs/router';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Triplet } from '@pmndrs/cannon-worker-api';
 import { NgtArgs, NgtCanvas, NgtRxStore } from 'angular-three';
@@ -7,6 +8,10 @@ import { NgtsOrbitControls } from 'angular-three-soba/controls';
 // @ts-ignore
 import niceColors from 'nice-color-palettes';
 import * as THREE from 'three';
+
+export const routeMeta: RouteMeta = {
+    title: 'Height Field',
+};
 
 type GenerateHeightmapArgs = {
     height: number;
