@@ -1,8 +1,9 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { injectBeforeRender, NgtArgs, NgtCanvas, NgtPush, NgtStore } from 'angular-three';
+import { NgtArgs, NgtCanvas, NgtPush, NgtStore } from 'angular-three';
 import { NgtsOrbitControls } from 'angular-three-soba/controls';
 import { injectNgtsGLTFLoader } from 'angular-three-soba/loaders';
+import { injectNgtsAnimations } from 'angular-three-soba/misc';
 import { NgtsStats } from 'angular-three-soba/performance';
 import { map } from 'rxjs';
 import * as THREE from 'three';
@@ -25,21 +26,12 @@ class Scene {
     readonly statsDom = this.gl.domElement.parentElement as HTMLElement;
     readonly texture = this.pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
-    private mixer?: THREE.AnimationMixer;
-
-    readonly model$ = injectNgtsGLTFLoader('LittlestTokyo.glb').pipe(
-        map((model) => {
-            const scene = model.scene;
-            this.mixer = new THREE.AnimationMixer(scene);
-            this.mixer.clipAction(model.animations[0]).play();
-            return scene;
-        })
-    );
+    // if we're not using injectNgtsAnimations, we can combine the map()
+    private readonly gltf$ = injectNgtsGLTFLoader('LittlestTokyo.glb');
+    readonly model$ = this.gltf$.pipe(map((gltf) => gltf.scene));
 
     constructor() {
-        injectBeforeRender(({ delta }) => {
-            this.mixer?.update(delta);
-        });
+        injectNgtsAnimations(this.gltf$);
     }
 }
 
