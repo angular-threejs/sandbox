@@ -1,6 +1,6 @@
 import { RouteMeta } from '@analogjs/router';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { NgtArgs, NgtCanvas, NgtPush, NgtStore } from 'angular-three';
+import { injectNgtRef, NgtArgs, NgtCanvas, NgtPush, NgtStore } from 'angular-three';
 import { NgtsOrbitControls } from 'angular-three-soba/controls';
 import { injectNgtsGLTFLoader } from 'angular-three-soba/loaders';
 import { injectNgtsAnimations } from 'angular-three-soba/misc';
@@ -26,12 +26,15 @@ class Scene {
     readonly statsDom = this.gl.domElement.parentElement as HTMLElement;
     readonly texture = this.pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
+    readonly modelRef = injectNgtRef<THREE.Object3D>();
+
     // if we're not using injectNgtsAnimations, we can combine the map()
     private readonly gltf$ = injectNgtsGLTFLoader('LittlestTokyo.glb');
+    private readonly animations$ = this.gltf$.pipe(map((gltf) => gltf.animations));
     readonly model$ = this.gltf$.pipe(map((gltf) => gltf.scene));
 
     constructor() {
-        injectNgtsAnimations(this.gltf$);
+        injectNgtsAnimations(this.animations$, this.modelRef);
     }
 }
 

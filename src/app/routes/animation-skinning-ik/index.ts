@@ -16,7 +16,6 @@ import { injectNgtsGLTFLoader } from 'angular-three-soba/loaders';
 import { map } from 'rxjs';
 import * as THREE from 'three';
 import { CCDIKHelper, CCDIKSolver, IKS, OrbitControls, TransformControls } from 'three-stdlib';
-// @ts-expect-error
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 export const routeMeta: RouteMeta = {
