@@ -1,0 +1,9 @@
+<MainSphere [material]="material" />
+<ngt-mesh
+    *ngFor="let position of initialPositions"
+    [position]="position"
+    [material]="material"
+    (beforeRender)="onBeforeRender($any($event).object)"
+>
+    <ngt-icosahedron-geometry *args="[1, 4]" />
+</ngt-mesh>

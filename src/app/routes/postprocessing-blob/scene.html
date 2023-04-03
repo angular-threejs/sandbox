@@ -1,0 +1,10 @@
+<ngt-color *args="['#050505']" attach="background" />
+<ngt-fog color="#161616" [near]="8" [far]="30" attach="fog" />
+
+<Environment />
+
+<ngtp-effect-composer [multisampling]="0" [disableNormalPass]="true">
+    <ngtp-bloom [luminanceThreshold]="0" [height]="300" [opacity]="5" />
+    <ngtp-noise [opacity]="0.025" />
+    <ngtp-vignette [eskil]="false" [offset]="0.1" [darkness]="0.1" />
+</ngtp-effect-composer>

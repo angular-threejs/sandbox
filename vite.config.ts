@@ -2,6 +2,7 @@
 
 import analog from '@analogjs/platform';
 import { defineConfig } from 'vite';
+import glslify from 'vite-plugin-glslify';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -12,7 +13,7 @@ export default defineConfig(({ mode }) => ({
     resolve: {
         mainFields: ['module'],
     },
-    plugins: [analog({ static: true })],
+    plugins: [glslify(), analog({ static: true })],
     test: {
         globals: true,
         environment: 'jsdom',

@@ -1,0 +1,14 @@
+<ngts-mesh-distort-material
+    [materialRef]="materialRef"
+    [envMap]="envMap$ | ngtPush"
+    [bumpMap]="bumpMap$ | ngtPush"
+    [roughness]="0.1"
+    [metalness]="1"
+    [bumpScale]="0.005"
+    [clearcoat]="1"
+    [clearcoatRoughness]="1"
+    [radius]="1"
+    [distort]="0.4"
+    color="#010101"
+/>
+<SphereInstances *ngIf="materialRef.nativeElement" [material]="materialRef.nativeElement" />
